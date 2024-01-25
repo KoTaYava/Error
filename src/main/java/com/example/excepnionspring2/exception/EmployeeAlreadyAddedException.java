@@ -1,5 +1,7 @@
 package com.example.excepnionspring2.exception;
 
+import java.util.Map;
+
 public class EmployeeAlreadyAddedException extends RuntimeException { // чтобы класс превратился в исключение
 
     public EmployeeAlreadyAddedException() {
