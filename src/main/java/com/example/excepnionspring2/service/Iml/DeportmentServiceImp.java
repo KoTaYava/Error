@@ -1,20 +1,15 @@
-package com.example.excepnionspring2.service;
+package com.example.excepnionspring2.service.Iml;
 
-import com.example.excepnionspring2.service.DepartmentService;
 import com.example.excepnionspring2.model.Employee;
+import com.example.excepnionspring2.service.DepartmentService;
 import com.example.excepnionspring2.service.EmployeeService;
+import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import com.example.excepnionspring2.model.Employee;
-import org.springframework.stereotype.Service;
-
-import java.util.*;
 import java.util.stream.Collectors;
-
-import static org.apache.tomcat.util.http.parser.HttpParser.isAlpha;
 
 @Service
 public class DeportmentServiceImp implements DepartmentService {
@@ -26,9 +21,8 @@ public class DeportmentServiceImp implements DepartmentService {
     @Override
     public Optional<Employee> findEmployeeMinSalaryByDepartment(int department) {
         return employeeService.findAllEmployees().stream()
-                .filter(employee -> employee.getDepartment)
+                .filter(employee -> employee.getDepartment()==department)
                 .min(Comparator.comparingInt(Employee::getSalary));
-
     }
 
     @Override

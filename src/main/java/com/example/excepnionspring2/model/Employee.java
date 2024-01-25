@@ -2,6 +2,7 @@ package com.example.excepnionspring2.model;
 
 import org.springframework.util.StringUtils;
 
+import java.util.Collection;
 import java.util.Objects;
 
 import static org.apache.tomcat.util.IntrospectionUtils.capitalize;
@@ -10,8 +11,8 @@ public class Employee {
 
         private final String firstName;
         private final String lastName;
-        private int salary;
-        private int department;
+        private static int salary;
+        private static int department;
 
         public Employee(String firstName, String lastName, int salary, int department) {
                 this.firstName = StringUtils.capitalize(firstName.toLowerCase());
@@ -25,11 +26,11 @@ public class Employee {
                 this.lastName = lastName;
         }
 
-        public int getDepartment() {
+        public static int getDepartment() {
                 return department;
         }
 
-        public int getSalary() {
+        public static int getSalary() {
                 return salary;
         }
 
@@ -59,8 +60,18 @@ public class Employee {
                 Employee employee = (Employee) o;
                 return Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName);
         }
+
         @Override
         public int hashCode() {
                 return Objects.hash(firstName, lastName);
         }
-}
+
+
+        public static int getSalary(Collection<Employee> employees) {
+                return salary;
+        }
+
+        }
+
+
+
