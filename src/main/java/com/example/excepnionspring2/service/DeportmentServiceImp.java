@@ -28,6 +28,7 @@ public class DeportmentServiceImp implements DepartmentService {
         return employeeService.findAllEmployees().stream()
                 .filter(employee -> employee.getDepartment)
                 .min(Comparator.comparingInt(Employee::getSalary));
+
     }
 
     @Override
