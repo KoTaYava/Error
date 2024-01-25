@@ -3,6 +3,7 @@ package com.example.excepnionspring2.service;
 import com.example.excepnionspring2.model.Employee;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -14,5 +15,5 @@ public interface DepartmentService {
 
     List<Employee> allEmployeesByDepartment(int department);
 
-    Object findAll();
+    Map<Integer, List<Employee>> findAll();
 }
