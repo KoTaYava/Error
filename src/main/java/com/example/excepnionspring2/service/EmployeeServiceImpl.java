@@ -1,10 +1,10 @@
-package com.example.excepnionspring2.service.Iml;
+package com.example.excepnionspring2.service;
 
-import com.example.excepnionspring2.exception.EmployeeStoragelsFullException;
 import com.example.excepnionspring2.model.Employee;
+import com.example.excepnionspring2.service.EmployeeService;
 import com.example.excepnionspring2.exception.EmployeeAlreadyAddedException;
 import com.example.excepnionspring2.exception.EmployeeNotFoundException;
-import com.example.excepnionspring2.service.EmployeeService;
+import com.example.excepnionspring2.exception.InvalidInputException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -45,28 +45,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee add(String firstName, String lastName, int salary, int department) {
-        return null;
-    }
-
-    @Override
-    public Employee remove(String firstName, String lastName) {
-        return null;
-    }
-
-    @Override
-    public Employee find(String firstName, String lastName) {
-        return null;
-    }
-
-    @Override
-    public Collection<Employee> findAllEmploee() {
-        return null;
-    }
-
-    @Override
-    public Optional<Collection<Employee>> findAllEmployees() {
-        return Optional.of(Collections.unmodifiableCollection(employeeMap.values()));
+    public Collection<Employee> findAllEmployees() {
+        return Collections.unmodifiableCollection(employeeMap.values());
     }
 
     @Override
@@ -80,7 +60,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private void validateInput(String firsName, String lastName) {
         if(!(isAlpha(Integer.parseInt(firsName))&&isAlpha(Integer.parseInt(lastName)))){
-            throw new EmployeeStoragelsFullException("incorrect name or surname");
+            throw new InvalidInputException("incorrect name or surname");
         }
     }
 }

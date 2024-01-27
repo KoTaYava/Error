@@ -1,13 +1,10 @@
-package com.example.excepnionspring2.service.Iml;
+package com.example.excepnionspring2.service;
 
 import com.example.excepnionspring2.model.Employee;
-import com.example.excepnionspring2.service.DepartmentService;
-import com.example.excepnionspring2.service.EmployeeService;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -26,11 +23,6 @@ public class DeportmentServiceImp implements DepartmentService {
     }
 
     @Override
-    public Optional<Employee> findEmploeeMinSalaryByDepartment(int department) {
-        return Optional.empty();
-    }
-
-    @Override
     public Optional<Employee> findEmployeeMaxSalaryByDepartment(int department) {
         return employeeService.findAllEmployees().stream()
                 .filter(employee -> employee.getDepartment()==department)
@@ -45,7 +37,7 @@ public class DeportmentServiceImp implements DepartmentService {
     }
 
     @Override
-    public Map<Integer, List<Employee>> findAll() {
+    public Object findAll() {
         return employeeService.findAllEmployees().stream()
                 .collect(Collectors.groupingBy(Employee::getDepartment));
     }
