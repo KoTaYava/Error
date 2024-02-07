@@ -27,7 +27,7 @@ public class Employee {
         return department;
     }
 
-    public  int getSalary() {
+    public int getSalary() {
         return salary;
     }
 
