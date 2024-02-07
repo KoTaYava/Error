@@ -2,23 +2,52 @@ package com.example.excepnionspring2.model;
 
 import java.util.Objects;
 
-
+import static org.springframework.util.StringUtils.capitalize;
 
 public class Employee {
-    private final String firstMame;
-    private final String lastName;
 
-    public Employee(String firstMame, String lastName) {
-        this.firstMame = firstMame;
+    private final String firstName;
+    private final String lastName;
+    private int salary;
+    private int department;
+
+    public Employee(String firstName, String lastName, int salary, int department) {
+        this.firstName = capitalize(firstName.toLowerCase());
+        this.lastName = capitalize(lastName.toLowerCase());
+        this.department = department;
+        this.salary = salary;
+    }
+
+    public Employee(String firstName, String lastName) {
+        this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public String getFirstMame() {
-        return firstMame;
+    public int getDepartment() {
+        return department;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public String getFirstName() {
+        return firstName;
     }
 
     public String getLastName() {
         return lastName;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", department=" + department +
+                ", salary=" + salary +
+                '}';
     }
 
     @Override
@@ -26,19 +55,12 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Objects.equals(getFirstMame(), employee.getFirstMame()) && Objects.equals(getLastName(), employee.getLastName());
+        return Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName);
     }
-
     @Override
     public int hashCode() {
-        return Objects.hash(getFirstMame(), getLastName());
+        return Objects.hash(firstName, lastName);
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "firstMame='" + firstMame + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
-    }
+
 }

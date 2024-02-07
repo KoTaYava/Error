@@ -2,39 +2,47 @@ package com.example.excepnionspring2.controller;
 
 import com.example.excepnionspring2.model.Employee;
 import com.example.excepnionspring2.service.EmployeeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 
 @RestController
-@RequestMapping(path = "/employees")
-public class EmployeeController  {
+@RequestMapping(path = "/employee")
+public class EmployeeController implements EmployeeService {
 
-    private final EmployeeService employeeService;
+    private EmployeeService employeeService;
 
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+
+    @ExceptionHandler
+    public ResponseEntity<String> handleEmployeeException(RuntimeException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping(path = "/add")
-    public Employee add(@RequestParam("firstName") String firstName,
-                        @RequestParam("lastName") String lastName)
-    {
-        return employeeService.add(firstName, lastName);
+    @GetMapping("/add")
+    public Employee addEmployee(@RequestParam("firstName") String firstName,
+                                @RequestParam("lastName") String lastName,
+                                @RequestParam("salary") int salary,
+                                @RequestParam("department") int department) {
+        return employeeService.addEmployee(firstName, lastName, salary, department);
     }
-    @GetMapping(path = "/remove")
-    public Employee remove(@RequestParam("firstName") String firstName,
-                           @RequestParam("lastName") String lastName)
-    {
-        return employeeService.remove(firstName, lastName);
+
+    @GetMapping("/find")
+    public Employee findEmployee(@RequestParam("firstName") String firstName,
+                                 @RequestParam("lastName") String lastName) {
+        return employeeService.findEmployee(firstName, lastName);
     }
-    @GetMapping(path = "/find")
-    public Employee find(@RequestParam("firstName") String firstName,
-                         @RequestParam("lastName") String lastName)
-    {
-        return employeeService.find(firstName, lastName);
+
+    @GetMapping("/remove")
+    public Employee removeEmployee(@RequestParam("firstName") String firstName,
+                                   @RequestParam("lastName") String lastName) {
+        return employeeService.removeEmployee(firstName, lastName);
+    }
+
+    @GetMapping
+    public Collection<Employee> findAllEmployees() {
+        return employeeService.findAllEmployees();
     }
 
 }
